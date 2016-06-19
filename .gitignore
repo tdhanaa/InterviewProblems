@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleMagicSquare
+{
+  class MagicSquare
+{
+static void Main(string[] args)
+{
+ int MATRIX_ROWS;
+ int MATRIX_COLUMNS;
+ 
+Console.WriteLine("Enter a Row Value of Matrix");
+MATRIX_ROWS=Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine("Enter a Column Value of Matrix");
+MATRIX_COLUMNS=Convert.ToInt32(Console.ReadLine());
+
+if(MATRIX_ROWS != MATRIX_COLUMNS)
+Console.WriteLine("Please Enter equal numbers since it is a square matrix");
+
+else
+{
+int[,] matrix = new int[MATRIX_ROWS, MATRIX_COLUMNS];
+for (int i = 0; i < MATRIX_ROWS; i++)
+{
+    for (int j = 0; j < MATRIX_COLUMNS; j++)
+    {
+        Console.Write("Enter value for ({0},{1}): ", i, j);
+        matrix[i,j] = int.Parse(Console.ReadLine());
+    }
+}
+//ChkMagic(matrix);
+
+ //  }
+
+//public ChkMagic(matrix)
+//{
+int N=MATRIX_ROWS;
+ int magicValue = GetSum(N * N) / N;
+Console.WriteLine("magicValue"+magicValue);
+                //Check for magic
+                bool isMagic = true;
+                for (int counterY = 0; counterY <matrix.GetLength(1); counterY++)
+                {
+                    int rowValue = 0;
+                    int columnValue = 0;
+                    for (int counterX = 0; counterX < matrix.GetLength(0); counterX++)
+                    {
+                        rowValue += Convert.ToInt32(matrix[counterY, counterX]);
+                        columnValue += Convert.ToInt32(matrix[counterX, counterY]);
+                    }
+
+                    if (rowValue != magicValue)
+                    {
+                        isMagic = false;
+                        break;
+                    }
+
+                    if (columnValue != magicValue)
+                    {
+                        isMagic = false;
+                        break;
+                    }
+
+                    rowValue = 0;
+                    columnValue = 0;
+                }
+
+                if (isMagic)
+                {
+                    Console.WriteLine("Yeah it is magic! :)");
+                }
+                else
+                {
+                    Console.WriteLine("No magic in the air!");
+                }
+}
+            }
+
+//}
+
+
+private static int GetSum(int maxValue)
+        {
+            if (maxValue < 1)
+            {
+                return 0;
+            }
+
+        return maxValue + GetSum(maxValue - 1);
+    }
+}
+}
